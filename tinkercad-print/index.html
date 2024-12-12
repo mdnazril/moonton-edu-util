@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2" />
+
+    <title>Moonton - Tinkercad Print Designs</title>
+
+
+    <style>
+        body,
+        html {
+            padding: 0;
+            margin: 0;
+        }
+
+        #printButton {
+            position: sticky;
+            top: 1rem;
+            left: 1rem;
+        }
+
+        #form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        #form textarea {
+            resize: none;
+        }
+
+        .page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            width: 210mm;
+            height: 297mm;
+            max-width: 100%;
+            margin: 20px auto;
+            padding: 5mm 0 0 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            background-color: white;
+            overflow: hidden;
+        }
+
+        .header img {
+            width: 300px;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .title {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .footer img {
+            width: 100%;
+        }
+
+        /* @media print {
+
+            body,
+            html {
+                margin: 0;
+                padding: 0;
+            }
+
+            .page {
+                page-break-after: always;
+                width: 210mm;
+                height: 297mm;
+                margin: 0;
+                box-shadow: none;
+                padding: 0;
+                border-radius: 10px;
+                border: 1px solid red;
+            }
+
+            #form,
+            #printButton {
+                display: none;
+            }
+        } */
+    </style>
+
+</head>
+
+<body>
+
+    <button id="printButton">Save as PDF</button>
+
+    <form id="form">
+
+        <textarea id="inputHTML" rows="10" cols="50"></textarea>
+
+        <button id="printData" type="submit">Submit</button>
+
+    </form>
+
+    <div id="print">
+
+        <div class="page">
+
+            <div class="header">
+                <img src="/assets/logo.png" alt="Logo" />
+            </div>
+
+            <div class="content">
+
+                <div class="title">{TITLE}</div>
+
+                <div class="photoContainer">
+                    <img src="/assets/placeholder.png" alt="Photo" class="photo" />
+                </div>
+
+            </div>
+
+            <div class="footer">
+                <img src="/assets/footer.png" alt="Footer" />
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/cash-dom/dist/cash.min.js"></script>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
