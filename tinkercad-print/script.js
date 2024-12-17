@@ -1,5 +1,4 @@
 $(function() {
-
     var form = $('#form');
     var print = $('#print');
     var pageTemplate = $('.page').first().clone();
@@ -38,19 +37,23 @@ $(function() {
             });
         }
 
-        let baseUrl = "https://csg.tinkercad.com/things/{idHere}/t725.png?rev=1730722667986000000&s=&v=1";
+        // Base URL template with placeholders for dynamic values
+        let baseUrl =
+            "https://csg.tinkercad.com/things/{idHere}/t725.png?rev={revHere}&s=&v=1";
 
+        // Extract 'id' from URL
         function extractId(url) {
-
             let extractedId = '';
-
             const match = url.match(/\/things\/([^-]+)/);
-
             if (match) {
                 extractedId = match[1];
             }
-
             return extractedId;
+        }
+
+        // Generate a dynamic 'rev' parameter based on current timestamp
+        function generateDynamicRev() {
+            return Date.now(); // Returns a dynamic numeric timestamp
         }
 
         outputData.forEach(function(entry) {
@@ -58,13 +61,18 @@ $(function() {
             newPage.find('.title').text(entry.name);
 
             let extractedId = extractId(entry.id);
-            let imageUrl = baseUrl.replace("{idHere}", extractedId);
+            let dynamicRev = generateDynamicRev();
+
+            // Replace placeholders in the base URL
+            let imageUrl = baseUrl
+                .replace("{idHere}", extractedId)
+                .replace("{revHere}", dynamicRev);
+
             newPage.find('.photo').attr('src', imageUrl || '/assets/placeholder.png');
 
             newPage.show();
             print.append(newPage);
         });
-
     });
 
     function printPage() {
@@ -93,7 +101,7 @@ $(function() {
                 page-break-after: always;
                 width: 210mm;
                 height: 297mm;
-                verflow: hidden;
+                overflow: hidden;
             }
         }
 
@@ -118,11 +126,6 @@ $(function() {
             gap: 1.5rem;
         }
 
-        .title {
-            font-size: 2rem;
-            font-weight: 700;
-        }
-
         .footer img {
             width: 100%;
         }
@@ -141,5 +144,4 @@ $(function() {
     }
 
     $('#printButton').on('click', printPage);
-
 });
